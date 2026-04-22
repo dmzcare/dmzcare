@@ -1,4 +1,46 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+
+const OG_IMAGE = "/BANNER%20-%20DMZ%20Care%20Logo.webp";
+
+const SITE_DESCRIPTION =
+  "Non-Emergency Medical Transportation for Residents in Louisville, KY.";
+
+export const metadata: Metadata = {
+  title: "Non-emergency medical transportation — Louisville, KY",
+  description: SITE_DESCRIPTION,
+  keywords: [
+    "DMZ Care",
+    "NEMT",
+    "non-emergency medical transportation",
+    "Louisville",
+    "Kentucky",
+    "medical transportation",
+    "healthcare rides",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "DMZ Care — Non-emergency medical transportation | Louisville, KY",
+    description: SITE_DESCRIPTION,
+    url: "/",
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1500,
+        height: 1500,
+        alt: "DMZ Care — non-emergency medical transportation in Louisville, Kentucky",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DMZ Care — Louisville NEMT",
+    description: SITE_DESCRIPTION,
+    images: [OG_IMAGE],
+  },
+};
 
 export default function Home() {
   return (

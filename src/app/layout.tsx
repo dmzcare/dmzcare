@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -13,12 +17,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Louisville NEMT",
-    template: "%s · Louisville NEMT",
+    default: "DMZ Care",
+    template: "%s | DMZ Care",
   },
-  description:
-    "Non-emergency medical transportation for residents in Louisville, Kentucky.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "DMZ Care",
+  },
 };
 
 export default function RootLayout({
