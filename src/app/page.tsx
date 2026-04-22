@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
-const OG_IMAGE = "/BANNER%20-%20DMZ%20Care%20Logo.webp";
+// WhatsApp uses Facebook’s crawler; PNG og:image is more reliable than WebP.
+const OG_IMAGE = "/og-dmz-care-banner.png";
 
 const SITE_DESCRIPTION =
   "Non-Emergency Medical Transportation for Residents in Louisville, KY.";
