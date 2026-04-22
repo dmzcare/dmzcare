@@ -8,7 +8,7 @@ export default function Home() {
           LAUNCHING SOON...
         </p>
         <Image
-          src="/DMZ%20Care%20Favicon.webp"
+          src="/DMZ%20Care%20Favicon.png"
           alt="DMZ Care"
           width={512}
           height={512}
