@@ -19,13 +19,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "DMZ Care",
-    template: "%s | DMZ Care",
+    default: "DMZCare.com",
+    template: "%s | DMZCare.com",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "DMZ Care",
+    siteName: "DMZCare.com",
   },
 };
 

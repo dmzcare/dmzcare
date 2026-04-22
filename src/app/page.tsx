@@ -6,8 +6,10 @@ const OG_IMAGE = "/BANNER%20-%20DMZ%20Care%20Logo.webp";
 const SITE_DESCRIPTION =
   "Non-Emergency Medical Transportation for Residents in Louisville, KY.";
 
+const PAGE_TITLE = `DMZCare.com — ${SITE_DESCRIPTION}`;
+
 export const metadata: Metadata = {
-  title: "Non-emergency medical transportation — Louisville, KY",
+  title: { absolute: PAGE_TITLE },
   description: SITE_DESCRIPTION,
   keywords: [
     "DMZ Care",
@@ -22,7 +24,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "DMZ Care — Non-emergency medical transportation | Louisville, KY",
+    title: PAGE_TITLE,
     description: SITE_DESCRIPTION,
     url: "/",
     images: [
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "DMZ Care — Louisville NEMT",
+    title: PAGE_TITLE,
     description: SITE_DESCRIPTION,
     images: [OG_IMAGE],
   },
