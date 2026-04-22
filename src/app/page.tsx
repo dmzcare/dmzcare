@@ -7,7 +7,7 @@ const OG_IMAGE = "/og-dmz-care-banner.png";
 const SITE_DESCRIPTION =
   "Non-Emergency Medical Transportation for Residents in Louisville, KY.";
 
-const PAGE_TITLE = `DMZCare.com — ${SITE_DESCRIPTION}`;
+const PAGE_TITLE = "DMZCare.com — Non-Emergency Medical Transportation";
 
 export const metadata: Metadata = {
   title: { absolute: PAGE_TITLE },
