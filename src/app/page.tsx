@@ -60,12 +60,12 @@ export default function Home() {
           priority
           className="mx-auto mb-10 h-[min(36rem,78vh)] w-auto max-w-[min(100%,60rem)] object-contain sm:h-[min(42rem,78vh)] sm:max-w-[min(100%,72rem)]"
         />
-        <p className="text-sm font-medium uppercase tracking-wide text-zinc-400">
+        <h1 className="text-3xl font-semibold tracking-tight text-zinc-50">
+          Non-Emergency Medical Transportation
+        </h1>
+        <p className="mt-6 text-sm font-medium uppercase tracking-wide text-zinc-400">
           Louisville, Kentucky
         </p>
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-50">
-          Non-emergency medical transportation
-        </h1>
       </main>
     </div>
   );
