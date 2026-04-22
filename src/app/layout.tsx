@@ -19,11 +19,6 @@ export const metadata: Metadata = {
   },
   description:
     "Non-emergency medical transportation for residents in Louisville, Kentucky.",
-  icons: {
-    icon: [{ url: "/DMZ%20Care%20Favicon.webp", type: "image/webp" }],
-    shortcut: "/DMZ%20Care%20Favicon.webp",
-    apple: "/DMZ%20Care%20Favicon.webp",
-  },
 };
 
 export default function RootLayout({
