@@ -1,26 +1,192 @@
 @import "tailwindcss";
 
 :root {
-  --background: #1a1a1a;
-  --foreground: #fafafa;
+  --dmz-dark: #1a1a1a;
+  --dmz-accent: #caf402;
+  --dmz-white: #ffffff;
+  --dmz-soft: #f5f5f5;
+  --dmz-text: #666666;
+  --dmz-border: #eaeaea;
+  --dmz-foreground: #1a1a1a;
+  --dmz-muted: #737373;
+  --dmz-orange: #ff6600;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-dmz-dark: var(--dmz-dark);
+  --color-dmz-accent: var(--dmz-accent);
+  --color-dmz-white: var(--dmz-white);
+  --color-dmz-soft: var(--dmz-soft);
+  --color-dmz-text: var(--dmz-text);
+  --color-dmz-border: var(--dmz-border);
+  --color-dmz-foreground: var(--dmz-foreground);
+  --color-dmz-muted: var(--dmz-muted);
+  --color-dmz-orange: var(--dmz-orange);
+  --font-sans: var(--font-sansation), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-sansation), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #1a1a1a;
-    --foreground: #fafafa;
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--dmz-white);
+  color: var(--dmz-foreground);
+  font-family: var(--font-sans);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+  font-weight: 400 !important;
+}
+
+/* Shared lift (px) applied to every stacked card during the exit segment of the deck scroll. */
+@property --deck-exit-shift {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+/*
+  Scroll-driven sticky deck (PayPal-style).
+
+  Mechanics:
+  - `.deck-stack` exposes a named scroll-timeline that maps the container's vertical
+    scroll progress to 0% → 100%.
+  - JS updates `--deck-scale` per card so every incoming card contributes a 10%
+    shrink step to the cards beneath it while it scrolls into its sticky position.
+  - Browsers without `animation-timeline` support still get sticky positioning and
+    measured scale steps; only the final shared exit lift falls back.
+  - `prefers-reduced-motion` disables the animation entirely (CSS rule above
+    already short-circuits all animations to ~0ms; we keep the keyframes inert).
+*/
+.deck-stack {
+  scroll-timeline-name: --deck-stack;
+  scroll-timeline-axis: block;
+}
+
+/*
+  Exit lift runs only in the final segment of this block’s timeline so the deck can
+  finish stacking (including the last card sticking) first; then `--deck-exit-shift`
+  moves every card up together.
+*/
+@supports (animation-timeline: scroll()) {
+  .deck-stack.deck-stack--exit-lift {
+    animation: deck-exit-shift-prop linear both;
+    animation-timeline: --deck-stack;
+    animation-range: 90% 100%;
+  }
+
+  @keyframes deck-exit-shift-prop {
+    from {
+      --deck-exit-shift: 0px;
+    }
+
+    to {
+      --deck-exit-shift: min(-36vh, -14rem);
+    }
+  }
+}
+
+.deck-card-scrim {
+  opacity: 0;
+}
+
+.deck-card {
+  transform: translateY(var(--deck-exit-shift, 0px))
+    scale(var(--deck-scale, 1));
+  transform-origin: top center;
+  will-change: transform;
+}
+
+/* 80% transparent black; opacity follows the measured covering depth. */
+.deck-card-scrim {
+  background: rgba(0, 0, 0, 0.2);
+  opacity: var(--deck-scrim-opacity, 0);
+  will-change: opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck-stack.deck-stack--exit-lift {
+    animation: none !important;
+    --deck-exit-shift: 0px !important;
+  }
+
+  .deck-card {
+    transform: none !important;
+  }
+
+  .deck-card-scrim {
+    opacity: 0 !important;
+  }
+}
+
+/*
+  Masonry “What we offer” grid (Services page) — intro first on mobile; desktop matches reference layout.
+*/
+.services-preview-grid {
+  display: grid;
+  gap: 0;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "intro"
+    "c01"
+    "c02"
+    "c03"
+    "c04"
+    "c05"
+    "c06";
+}
+
+@media (min-width: 1024px) {
+  .services-preview-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "c01 c01 c02 c03"
+      "c04 c05 c05 c06"
+      "intro intro intro c06";
+  }
+}
+
+/*
+  About page image reveal: native <img> geometry animates (no Next/Image wrapper box).
+*/
+.about-visual-image {
+  will-change: margin-top, margin-bottom, width, height;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-visual-image {
+    animation: none !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100vw !important;
+    height: 100svh !important;
+  }
+}
+
+/* Mobile stagger drawer: keyboard focus */
+#nav-menu-toggle:focus-visible,
+#staggered-mobile-nav .sm-panel-link:focus-visible,
+#staggered-mobile-nav .sm-social-link:focus-visible {
+  outline: 2px solid var(--dmz-accent);
+  outline-offset: 3px;
 }

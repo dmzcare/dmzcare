@@ -1,0 +1,229 @@
+import Image from "next/image";
+import Link from "next/link";
+import { cardBackgroundAt } from "@/lib/card-images";
+import { SERVICE_OFFERINGS } from "@/lib/site";
+
+type Plate = "dark" | "accent" | "gray" | "white" | "orange";
+
+type ServiceBlock = {
+  slug: string;
+  title: string;
+  description: string;
+  plate: Plate;
+  /** Full-bleed photo on hover (same pattern as About → What guides us) */
+  image: string;
+};
+
+/** Six appointment-type tiles; used on the Services page (masonry grid). */
+const SERVICE_BLOCKS: ServiceBlock[] = [
+  {
+    slug: SERVICE_OFFERINGS[0].slug,
+    title: SERVICE_OFFERINGS[0].label,
+    description:
+      "Door-to-clinic rides that keep annual exams, specialty consults, and imaging days steady. Arrivals lined up with registration and labs.",
+    plate: "dark",
+    image: cardBackgroundAt(0),
+  },
+  {
+    slug: SERVICE_OFFERINGS[1].slug,
+    title: SERVICE_OFFERINGS[1].label,
+    description:
+      "Chair-time fidelity for dialysis and infusion: recurring routes planned so tight treatment windows stay dependable visit after visit.",
+    plate: "accent",
+    image: cardBackgroundAt(1),
+  },
+  {
+    slug: SERVICE_OFFERINGS[2].slug,
+    title: SERVICE_OFFERINGS[2].label,
+    description:
+      "Timed around rehab gains, with extra patience at pickup when braces, soreness, or gait aids slow each step.",
+    plate: "gray",
+    image: cardBackgroundAt(2),
+  },
+  {
+    slug: SERVICE_OFFERINGS[3].slug,
+    title: SERVICE_OFFERINGS[3].label,
+    description:
+      "Same-day suites handled with coordinated arrivals, then a composed ride home while discharge guidance is still top of mind.",
+    plate: "white",
+    image: cardBackgroundAt(3),
+  },
+  {
+    slug: SERVICE_OFFERINGS[4].slug,
+    title: SERVICE_OFFERINGS[4].label,
+    description:
+      "Respectful transportation to therapy, psychiatry, IOP, and related visits. Details stay private from booking through drop-off.",
+    plate: "dark",
+    image: cardBackgroundAt(4),
+  },
+  {
+    slug: SERVICE_OFFERINGS[5].slug,
+    title: SERVICE_OFFERINGS[5].label,
+    description:
+      "Quick hops for cleanings or longer rides after oral surgery, with a softer trip home when jaws ache or dizziness lingers.",
+    plate: "orange",
+    image: cardBackgroundAt(5),
+  },
+];
+
+function plateClasses(plate: Plate) {
+  switch (plate) {
+    case "dark":
+      return {
+        panel: "bg-dmz-dark text-white",
+        title: "text-white",
+        body: "text-white/78",
+      };
+    case "accent":
+      return {
+        panel: "bg-dmz-accent text-dmz-dark",
+        title: "text-dmz-dark",
+        body: "text-dmz-dark/85",
+      };
+    case "gray":
+      return {
+        panel: "bg-dmz-soft text-dmz-dark",
+        title: "text-dmz-dark",
+        body: "text-dmz-text",
+      };
+    case "white":
+      return {
+        panel: "bg-dmz-white text-dmz-dark",
+        title: "text-dmz-dark",
+        body: "text-dmz-text",
+      };
+    case "orange":
+      return {
+        panel: "bg-dmz-orange text-white",
+        title: "text-white",
+        body: "text-white/78",
+      };
+  }
+}
+
+function OfferCard({
+  index,
+  block,
+  gridArea,
+  className = "",
+}: {
+  index: number;
+  block: ServiceBlock;
+  gridArea: string;
+  className?: string;
+}) {
+  const no = String(index + 1).padStart(2, "0");
+  const s = plateClasses(block.plate);
+
+  return (
+    <div
+      id={block.slug}
+      style={{ gridArea }}
+      className={`scroll-mt-28 group relative flex min-h-[13rem] flex-col justify-center overflow-hidden p-8 transition-shadow duration-300 ease-out hover:shadow-[0_22px_44px_-18px_rgba(26,26,26,0.18)] sm:p-9 sm:scroll-mt-32 lg:min-h-[15.5rem] lg:p-10 lg:scroll-mt-36 ${s.panel} ${className}`}
+    >
+      <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+        <Image
+          src={block.image}
+          alt=""
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
+          priority={index === 0}
+          className="object-cover object-center opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 motion-reduce:opacity-0 motion-reduce:transition-opacity motion-reduce:duration-200 motion-reduce:group-hover:opacity-100"
+          aria-hidden
+        />
+      </div>
+
+      <div
+        className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-b from-black/80 via-black/45 to-black/10 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 motion-reduce:opacity-0 motion-reduce:transition-opacity motion-reduce:duration-200 motion-reduce:group-hover:opacity-100"
+        aria-hidden
+      />
+
+      <span
+        className="pointer-events-none absolute right-3 top-2 z-[3] font-heading text-[clamp(3.5rem,14vw,6.5rem)] leading-none text-white opacity-0 transition-opacity duration-300 ease-out select-none group-hover:opacity-[0.2] motion-reduce:opacity-[0.12] motion-reduce:transition-opacity motion-reduce:duration-200 motion-reduce:group-hover:opacity-[0.2]"
+        aria-hidden
+      >
+        {no}
+      </span>
+
+      <h3
+        className={`font-heading relative z-[4] text-lg leading-snug tracking-tight transition-colors duration-300 ease-out group-hover:text-white sm:text-xl ${s.title}`}
+      >
+        {block.title}
+      </h3>
+      <p
+        className={`relative z-[4] mt-4 max-w-prose text-sm leading-relaxed transition-colors duration-300 ease-out group-hover:text-white/85 sm:text-[0.9375rem] ${s.body}`}
+      >
+        {block.description}
+      </p>
+    </div>
+  );
+}
+
+type WhatWeOfferGridProps = {
+  /** Hide “View all services” when this block already lives on `/services`. */
+  hideFooterServicesLink?: boolean;
+};
+
+export function WhatWeOfferGrid({ hideFooterServicesLink = false }: WhatWeOfferGridProps) {
+  const [b1, b2, b3, b4, b5, b6] = SERVICE_BLOCKS;
+
+  return (
+    <section className="overflow-hidden bg-dmz-soft" aria-labelledby="services-preview-heading">
+      <div className="mx-auto max-w-7xl px-4 pb-14 pt-20 sm:px-6 sm:pb-16 sm:pt-24 lg:px-8 lg:pb-20 lg:pt-28">
+        <div className="mt-2 w-full shadow-[0_28px_64px_-28px_rgba(26,26,26,0.35)]">
+          <div className="services-preview-grid">
+            <IntroPanel />
+            <OfferCard index={0} block={b1} gridArea="c01" className="lg:min-h-[17rem]" />
+            <OfferCard index={1} block={b2} gridArea="c02" />
+            <OfferCard index={2} block={b3} gridArea="c03" />
+            <OfferCard index={3} block={b4} gridArea="c04" />
+            <OfferCard index={4} block={b5} gridArea="c05" className="lg:min-h-[17rem]" />
+            <OfferCard index={5} block={b6} gridArea="c06" className="min-h-[16rem] lg:min-h-0" />
+          </div>
+        </div>
+
+        {!hideFooterServicesLink ? (
+          <p className="mx-auto mt-12 max-w-3xl text-center text-sm text-dmz-text lg:mt-14">
+            <Link
+              href="/services"
+              className="font-semibold text-dmz-dark underline decoration-dmz-border underline-offset-4 transition hover:decoration-dmz-dark"
+            >
+              View all services
+            </Link>
+          </p>
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
+function IntroPanel() {
+  return (
+    <div
+      style={{ gridArea: "intro" }}
+      className="flex flex-col justify-center bg-dmz-white p-8 sm:p-10 lg:min-h-[min(22rem,34vh)] lg:p-12"
+    >
+      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-dmz-text">What we offer</p>
+      <h2
+        id="services-preview-heading"
+        className="font-heading mt-4 text-[clamp(1.65rem,3.5vw,2.35rem)] leading-[1.15] tracking-tight text-dmz-dark"
+      >
+        Medical Transportation For Every Appointment
+      </h2>
+      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-dmz-text sm:text-base">
+        DMZ Care coordinates dependable non-emergency transportation throughout Louisville and neighboring counties.
+        Whether your trip is covered through Medicaid programs, managed-care authorizations, or booked directly as
+        private pay, we obsess over departure times and curb details so your attention stays on clinicians, not
+        traffic.
+      </p>
+      <p className="mt-8">
+        <Link
+          href="/booking"
+          className="inline-flex border border-dmz-dark/20 bg-dmz-soft px-7 py-3 text-sm font-semibold text-dmz-dark transition hover:border-dmz-dark hover:bg-dmz-white"
+        >
+          Request a ride
+        </Link>
+      </p>
+    </div>
+  );
+}
