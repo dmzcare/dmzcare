@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SITE } from "@/lib/site";
 
@@ -70,12 +69,6 @@ export function Hero() {
 
                 <div className="mt-10 flex flex-wrap items-center gap-4 sm:mt-12">
                   <ButtonLink href="/booking">Request a ride</ButtonLink>
-                  <Link
-                    href="/services"
-                    className="inline-flex items-center justify-center px-5 py-3 text-sm font-semibold text-white underline-offset-4 hover:underline"
-                  >
-                    Explore services
-                  </Link>
                 </div>
               </div>
             </div>

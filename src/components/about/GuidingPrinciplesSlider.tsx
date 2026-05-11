@@ -88,28 +88,28 @@ export function GuidingPrinciplesSlider() {
         </h2>
       </div>
 
-      <div className="mt-14 overflow-x-auto pb-16 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:pb-24">
-        <div className="mx-auto w-max px-4 pb-2 sm:px-6 lg:px-8">
-          <div
-            role="list"
-            aria-label="What guides us"
-            className="flex snap-x snap-mandatory gap-[1.31rem]"
-          >
-            {SLIDES.map((slide, index) => {
-              const s = slideSurface(slide.variant);
-              return (
-                <article
-                  key={slide.title}
-                  role="listitem"
-                  className={`group relative flex h-[37.5rem] w-[min(90vw,35.1875rem)] shrink-0 snap-start flex-col items-stretch justify-start overflow-hidden p-8 transition-shadow duration-300 ease-out hover:shadow-[0_22px_44px_-18px_rgba(26,26,26,0.18)] sm:p-10 ${s.panel}`}
-                >
+      {/* snap + overflow on same element; narrower cards below lg so the next slide peeks (affordance to swipe) */}
+      <div className="mt-14 snap-x snap-mandatory overflow-x-auto pb-16 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:pb-24">
+        <div
+          className="mx-auto flex w-max gap-[1.31rem] pb-2 max-lg:pl-[max(1rem,calc(50vw-min(41vw,17.59375rem)))] max-lg:pr-[max(1rem,calc(50vw-min(41vw,17.59375rem)))] lg:pl-8 lg:pr-8"
+          role="list"
+          aria-label="What guides us"
+        >
+          {SLIDES.map((slide, index) => {
+            const s = slideSurface(slide.variant);
+            return (
+              <article
+                key={slide.title}
+                role="listitem"
+                className={`group relative flex h-[37.5rem] w-[min(82vw,35.1875rem)] shrink-0 snap-center flex-col items-stretch justify-start overflow-hidden p-8 transition-shadow duration-300 ease-out hover:shadow-[0_22px_44px_-18px_rgba(26,26,26,0.18)] sm:p-10 lg:w-[min(90vw,35.1875rem)] lg:snap-start ${s.panel}`}
+              >
                   {/* Full-bleed photo: fixed crop; calm crossfade on hover (no pan / zoom) */}
                   <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
                     <Image
                       src={slide.image}
                       alt=""
                       fill
-                      sizes="(max-width: 640px) 90vw, 35rem"
+                      sizes="(max-width: 1023px) 82vw, (max-width: 1280px) 90vw, 35rem"
                       priority={index === 0}
                       className="object-cover object-center opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 motion-reduce:opacity-0 motion-reduce:transition-opacity motion-reduce:duration-200 motion-reduce:group-hover:opacity-100"
                       aria-hidden
@@ -157,10 +157,9 @@ export function GuidingPrinciplesSlider() {
                       <ArrowIcon inverse={s.ctaInverse} />
                     </span>
                   </Link>
-                </article>
-              );
-            })}
-          </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

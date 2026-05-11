@@ -28,7 +28,7 @@ export default function AboutPage() {
       >
         <div className="grid flex-1 grid-cols-[minmax(0,0.38fr)_1px_minmax(0,1fr)] items-stretch gap-10 px-4 py-10 sm:gap-12 sm:px-6 md:gap-16 md:px-8 lg:gap-28 lg:px-16 lg:py-24 xl:gap-36 xl:px-24">
           <div className="flex items-center justify-center py-2 md:justify-end md:py-8">
-            <AboutHeroLogo photoSrc={ABOUT_SCROLL_IMG} />
+            <AboutHeroLogo />
           </div>
 
           <div className="w-px shrink-0 bg-dmz-border" aria-hidden />
@@ -77,7 +77,7 @@ export default function AboutPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-dmz-text">
               Our Mission
             </p>
-            <h2 className="font-heading mt-4 text-[52px] font-bold leading-[1.12] tracking-tight text-dmz-dark">
+            <h2 className="font-heading mt-4 text-[44px] sm:text-[48px] lg:text-[52px] font-bold leading-[1.12] tracking-tight text-dmz-dark">
               Attention To Detail On Every Trip
             </h2>
             <p className="mt-6 text-base leading-relaxed text-dmz-text">

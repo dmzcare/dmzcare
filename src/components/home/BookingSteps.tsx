@@ -56,7 +56,7 @@ export function BookingSteps() {
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-white/55">
             Simple booking
           </p>
-          <h2 className="font-heading mt-4 text-[52px] font-bold leading-[1.12] tracking-tight text-white">
+          <h2 className="font-heading mt-4 text-[44px] sm:text-[48px] lg:text-[52px] font-bold leading-[1.12] tracking-tight text-white">
             Book A Ride Quickly
           </h2>
         </header>

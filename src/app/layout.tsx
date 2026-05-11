@@ -47,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${sansation.variable} h-full antialiased`}>
+    <html lang="en" className={`${sansation.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="text-dmz-foreground flex min-h-full flex-col bg-dmz-white">
         <a
           href="#main-content"

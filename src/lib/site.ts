@@ -16,11 +16,18 @@ export const SITE = {
   },
 } as const;
 
-/** Header/footer lockup; file lives in /public (`unoptimized` in Image). */
+/** Header/footer horizontal lockup; file lives in /public (`unoptimized` in Image). */
 export const SITE_LOGO = {
   src: "/DMZ%20Care%20Dark%20Logo.webp",
   width: 3777,
   height: 705,
+} as const;
+
+/** Square mark / favicon artwork for hero spots and icon-sized UI (original colors). */
+export const SITE_LOGO_ICON = {
+  src: "/DMZ%20Care%20Favicon.webp",
+  width: 1151,
+  height: 1160,
 } as const;
 
 export const NAV_LINKS = [

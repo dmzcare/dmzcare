@@ -56,7 +56,7 @@ export function AboutSummary() {
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-dmz-text">
             About DMZ Care
           </p>
-          <h2 className="font-heading mt-4 text-[52px] font-bold leading-[1.12] tracking-tight text-dmz-dark">
+          <h2 className="font-heading mt-4 text-[44px] sm:text-[48px] lg:text-[52px] font-bold leading-[1.12] tracking-tight text-dmz-dark">
             Respectful Transportation For Every Person
           </h2>
           <p className="mt-6 text-base leading-relaxed text-dmz-text">

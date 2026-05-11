@@ -207,7 +207,7 @@ function LayeredServiceCard({
           <div
             className={`order-1 flex flex-col justify-center px-6 py-7 sm:px-8 sm:py-8 lg:px-12 lg:py-12 xl:px-14 ${plateStyle.panel}`}
           >
-            <h3 className={`font-heading text-[52px] font-bold leading-[1.12] tracking-tight ${plateStyle.title}`}>
+            <h3 className={`font-heading text-[44px] sm:text-[48px] lg:text-[52px] font-bold leading-[1.12] tracking-tight ${plateStyle.title}`}>
               {block.title}
             </h3>
             <p className={`mt-4 text-sm leading-relaxed sm:text-base lg:mt-5 lg:text-base ${plateStyle.body}`}>
@@ -327,7 +327,7 @@ export function ServicesPreview() {
       <div className="mx-auto max-w-7xl px-4 pb-6 pt-20 text-center sm:px-6 sm:pb-8 sm:pt-24 lg:px-8 lg:pb-10 lg:pt-28">
         <div className="mx-auto max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-dmz-text">What we offer</p>
-          <h2 className="font-heading mt-4 text-[52px] font-bold leading-[1.12] tracking-tight text-dmz-dark">
+          <h2 className="font-heading mt-4 text-[44px] sm:text-[48px] lg:text-[52px] font-bold leading-[1.12] tracking-tight text-dmz-dark">
             Medical Transportation For Every Appointment
           </h2>
         </div>

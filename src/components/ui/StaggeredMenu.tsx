@@ -77,6 +77,7 @@ export const StaggeredMenu = forwardRef<StaggeredMenuHandle, StaggeredMenuProps>
   const prelayerRefs = useRef<Array<HTMLDivElement | null>>([]);
   const openTl = useRef<gsap.core.Timeline | null>(null);
   const isOpenRef = useRef(false);
+  const [isArmed, setIsArmed] = useState(false);
   const reducedMotion = usePrefersReducedMotion();
 
   const xPercentClosed = position === "right" ? IN_X : -IN_X;
@@ -117,21 +118,26 @@ export const StaggeredMenu = forwardRef<StaggeredMenuHandle, StaggeredMenuProps>
   }, []);
 
   useLayoutEffect(() => {
+    const panel = panelRef.current;
     const ctx = gsap.context(() => {
       prelayerRefs.current.forEach((el) => {
         if (el) gsap.set(el, { xPercent: xPercentClosed });
       });
-      if (panelRef.current) gsap.set(panelRef.current, { xPercent: xPercentClosed });
+      if (panel) gsap.set(panel, { xPercent: xPercentClosed });
       resetLabelDom();
     });
-    return () => ctx.revert();
+    setIsArmed(true);
+    return () => {
+      ctx.revert();
+      setIsArmed(false);
+    };
   }, [xPercentClosed, resetLabelDom]);
 
   const playClose = useCallback(() => {
     killOpenTimeline();
     const panel = panelRef.current;
     const layers = prelayerRefs.current.filter(Boolean) as HTMLDivElement[];
-    if (!panel || layers.length === 0) {
+    if (!panel) {
       isOpenRef.current = false;
       setOpen(false);
       onMenuClose?.();
@@ -139,7 +145,8 @@ export const StaggeredMenu = forwardRef<StaggeredMenuHandle, StaggeredMenuProps>
     }
 
     if (reducedMotion) {
-      gsap.set([...layers, panel], { xPercent: xPercentClosed });
+      const toTween = layers.length ? [...layers, panel] : [panel];
+      gsap.set(toTween, { xPercent: xPercentClosed });
       panel.querySelectorAll(".sm-panel-itemLabel").forEach((el) => gsap.set(el, { clearProps: "all" }));
       setNumOpacity(0, 0);
       isOpenRef.current = false;
@@ -148,11 +155,12 @@ export const StaggeredMenu = forwardRef<StaggeredMenuHandle, StaggeredMenuProps>
       return;
     }
 
-    gsap.to([...layers, panel], {
+    const closeTargets = layers.length ? [...layers, panel] : panel;
+    gsap.to(closeTargets, {
       xPercent: xPercentClosed,
       duration: 0.32,
       ease: EASE_IN,
-      stagger: 0.03,
+      stagger: layers.length ? 0.03 : 0,
       overwrite: true,
       onComplete: () => {
         resetLabelDom();
@@ -175,14 +183,14 @@ export const StaggeredMenu = forwardRef<StaggeredMenuHandle, StaggeredMenuProps>
     killOpenTimeline();
     const panel = panelRef.current;
     const layers = prelayerRefs.current.filter(Boolean) as HTMLDivElement[];
-    if (!panel || layers.length === 0) return;
+    if (!panel) return;
 
     isOpenRef.current = true;
     setOpen(true);
     onMenuOpen?.();
 
     if (reducedMotion) {
-      gsap.set(layers, { xPercent: 0 });
+      if (layers.length) gsap.set(layers, { xPercent: 0 });
       gsap.set(panel, { xPercent: 0 });
       panel.querySelectorAll(".sm-panel-itemLabel").forEach((el) =>
         gsap.set(el, { yPercent: 0, rotate: 0, opacity: 1 }),
@@ -201,13 +209,13 @@ export const StaggeredMenu = forwardRef<StaggeredMenuHandle, StaggeredMenuProps>
     const tl = gsap.timeline({ defaults: { overwrite: "auto" } });
     openTl.current = tl;
 
-    tl.to(layers, {
-      xPercent: 0,
-      duration: 0.48,
-      stagger: 0.07,
-      ease: EASE_OUT,
-    })
-      .to(
+    if (layers.length) {
+      tl.to(layers, {
+        xPercent: 0,
+        duration: 0.48,
+        stagger: 0.07,
+        ease: EASE_OUT,
+      }).to(
         panel,
         {
           xPercent: 0,
@@ -215,8 +223,16 @@ export const StaggeredMenu = forwardRef<StaggeredMenuHandle, StaggeredMenuProps>
           ease: EASE_OUT,
         },
         "-=0.28",
-      )
-      .to(
+      );
+    } else {
+      tl.to(panel, {
+        xPercent: 0,
+        duration: 0.62,
+        ease: EASE_OUT,
+      });
+    }
+
+    tl.to(
         labelEls,
         {
           yPercent: 0,
@@ -226,7 +242,7 @@ export const StaggeredMenu = forwardRef<StaggeredMenuHandle, StaggeredMenuProps>
           stagger: 0.09,
           ease: "power3.out",
         },
-        "-=0.35",
+        layers.length ? "-=0.35" : "+=0",
       );
 
     if (displayItemNumbering) {
@@ -326,7 +342,9 @@ export const StaggeredMenu = forwardRef<StaggeredMenuHandle, StaggeredMenuProps>
       <div
         ref={panelRef}
         id="staggered-menu-panel"
-        className="staggered-menu-panel"
+        className={`staggered-menu-panel ${isArmed ? "sm-panel--armed" : ""} ${
+          open ? "pointer-events-auto" : "pointer-events-none"
+        }`}
         role="dialog"
         aria-modal="true"
         aria-label="Site navigation"

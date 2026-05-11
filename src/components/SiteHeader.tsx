@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { NAV_LINKS, SITE, SITE_LOGO } from "@/lib/site";
+import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import {
   StaggeredMenu,
@@ -83,10 +84,43 @@ export function SiteHeader() {
   }, [updateIndicator]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const desktopQuery = window.matchMedia("(min-width: 1024px)");
+    let frame = 0;
+
+    const updateScrolled = () => {
+      frame = 0;
+      setScrolled(window.scrollY > 12);
+    };
+
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(updateScrolled);
+    };
+
+    const syncListener = () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+        frame = 0;
+      }
+
+      if (desktopQuery.matches) {
+        updateScrolled();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      } else {
+        // Chrome mobile resizes the visual viewport while scrolling; keep the header stable there.
+        setScrolled(false);
+      }
+    };
+
+    syncListener();
+    desktopQuery.addEventListener("change", syncListener);
+
+    return () => {
+      desktopQuery.removeEventListener("change", syncListener);
+      window.removeEventListener("scroll", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {
@@ -102,8 +136,8 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-50 overflow-visible border-b border-white/10 transition-[background-color] duration-300 ease-out motion-reduce:transition-none ${
-        scrolled ? "bg-dmz-dark/72 backdrop-blur-xl" : "bg-dmz-dark"
+      className={`sticky top-0 z-50 overflow-visible border-b border-white/10 bg-dmz-dark lg:transition-[background-color,backdrop-filter] lg:duration-300 lg:ease-out motion-reduce:transition-none ${
+        scrolled ? "lg:bg-dmz-dark/72 lg:backdrop-blur-xl" : ""
       }`}
     >
       {drawerOpen ? (
@@ -114,10 +148,23 @@ export function SiteHeader() {
         />
       ) : null}
 
-      <div className="flex w-full items-stretch justify-between gap-4 px-5 sm:px-8 lg:px-12 xl:px-16">
+      <StaggeredMenu
+        ref={staggeredMenuRef}
+        externalToggleRef={menuToggleRef}
+        position="right"
+        items={staggeredMenuItems}
+        socialItems={staggeredSocialItems}
+        displaySocials
+        displayItemNumbering
+        colors={["#caf402", "#1a1a1a"]}
+        onMenuOpen={() => setDrawerOpen(true)}
+        onMenuClose={() => setDrawerOpen(false)}
+      />
+
+      <div className="relative z-[60] flex w-full items-stretch justify-between gap-4 px-5 sm:px-8 lg:px-12 xl:px-16">
         <Link
           href="/"
-          className="flex shrink-0 items-center py-3 lg:py-4"
+          className="flex shrink-0 items-center py-2 lg:py-4"
         >
           <Image
             src={SITE_LOGO.src}
@@ -164,7 +211,7 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <div className="flex items-center gap-2 py-3 sm:gap-3 lg:py-4">
+        <div className="flex items-center gap-2 py-2 sm:gap-3 lg:py-4">
           <a
             href={`tel:${SITE.phoneTel}`}
             className="hidden text-sm font-semibold leading-none text-white underline-offset-4 hover:text-dmz-accent hover:underline sm:inline sm:max-lg:py-0.5"
@@ -173,53 +220,33 @@ export function SiteHeader() {
           </a>
           <ButtonLink
             href="/booking"
-            className="hidden !h-9 !min-h-0 !py-0 !px-3 !text-xs leading-none sm:inline-flex sm:!h-10 lg:!h-auto lg:!min-h-0 lg:!px-6 lg:!py-3 lg:!text-sm lg:!leading-normal"
+            className="!hidden lg:!inline-flex"
           >
             Book a ride
           </ButtonLink>
-
           <button
             ref={menuToggleRef}
             id="nav-menu-toggle"
             type="button"
-            className={`relative z-[60] inline-flex size-9 shrink-0 items-center justify-center border p-0 sm:size-10 lg:hidden ${
+            className={`relative inline-flex size-14 shrink-0 touch-manipulation items-center justify-center p-1.5 sm:size-16 lg:hidden ${
               drawerOpen
-                ? "border-dmz-dark/20 bg-white text-dmz-dark hover:bg-white"
-                : "border-white/25 text-white hover:bg-white/10"
+                ? "bg-white text-dmz-dark hover:bg-white"
+                : "text-white hover:bg-white/10"
             }`}
             aria-expanded={drawerOpen}
             aria-controls="staggered-menu-panel"
             onClick={() => staggeredMenuRef.current?.toggle()}
           >
             <span className="sr-only">{drawerOpen ? "Close menu" : "Open menu"}</span>
-            {drawerOpen ? (
-              <svg className="size-[18px] sm:size-5" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M6.4 19L5 17.6l5.6-5.6L5 6.4 6.4 5l5.6 5.6L17.6 5 19 6.4 13.6 12 19 17.6 17.6 19 12 13.4 6.4 19z"
-                />
-              </svg>
-            ) : (
-              <svg className="size-[18px] sm:size-5" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z" />
-              </svg>
-            )}
+            <MenuToggleIcon
+              open={drawerOpen}
+              aria-hidden
+              className="size-10 sm:size-11"
+              duration={320}
+            />
           </button>
         </div>
       </div>
-
-      <StaggeredMenu
-        ref={staggeredMenuRef}
-        externalToggleRef={menuToggleRef}
-        position="right"
-        items={staggeredMenuItems}
-        socialItems={staggeredSocialItems}
-        displaySocials
-        displayItemNumbering
-        colors={["#caf402", "#1a1a1a"]}
-        onMenuOpen={() => setDrawerOpen(true)}
-        onMenuClose={() => setDrawerOpen(false)}
-      />
     </header>
   );
 }

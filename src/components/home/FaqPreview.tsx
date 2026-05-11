@@ -8,7 +8,7 @@ export function FaqPreview() {
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-dmz-text">FAQs</p>
-          <h2 className="font-heading mt-4 text-[52px] font-bold leading-[1.12] tracking-tight text-dmz-dark">
+          <h2 className="font-heading mt-4 text-[44px] sm:text-[48px] lg:text-[52px] font-bold leading-[1.12] tracking-tight text-dmz-dark">
             Clear Answers For Common Questions
           </h2>
           <p className="mt-4 text-dmz-text">

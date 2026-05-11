@@ -28,7 +28,7 @@ export function PageIntro({
         </p>
       ) : null}
       <h1
-        className={`font-heading mt-4 max-w-4xl text-[52px] font-bold leading-[1.12] tracking-tight ${splitAccent ? "text-dmz-dark" : ""}`}
+        className={`font-heading mt-4 max-w-4xl text-[44px] sm:text-[48px] lg:text-[52px] font-bold leading-[1.12] tracking-tight ${splitAccent ? "text-dmz-dark" : ""}`}
       >
         {title}
       </h1>
