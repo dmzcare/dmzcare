@@ -1,18 +1,26 @@
 import type { Metadata } from "next";
 import { FaqAccordionTwoColumn } from "@/components/FaqAccordion";
 import { PageIntro } from "@/components/PageIntro";
+import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { FAQ_COLUMN_LEFT, FAQ_COLUMN_RIGHT } from "@/lib/faqs";
+import { pageMetadata } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "FAQs",
-  description: `Frequently asked questions about booking, accessibility, coverage, and billing for ${SITE.name} non-emergency medical transportation.`,
-  alternates: { canonical: "/faqs" },
-};
+  description: `Frequently asked questions about booking ${SITE.name} rides, wheelchair-accessible vehicles, service areas, billing, insurance, and driver assistance in the Louisville region.`,
+  pathname: "/faqs",
+  keywords: [
+    "NEMT FAQ Louisville",
+    "wheelchair ride questions",
+    "medical transportation booking help",
+  ],
+});
 
 export default function FaqsPage() {
   return (
     <>
+      <FaqPageJsonLd />
       <PageIntro
         eyebrow="FAQs"
         title="Straight Answers For Booking And Rides"

@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { PageIntro } from "@/components/PageIntro";
+import { pageMetadata } from "@/lib/seo";
 import { SERVICE_AREAS, SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact Us",
-  description: `Reach ${SITE.name} by phone or message for NEMT scheduling and questions. Serving Louisville, KY and surrounding counties.`,
-  alternates: { canonical: "/contact" },
-};
+  description: `Reach ${SITE.name} by phone or email for NEMT scheduling, coverage questions, and ride coordination. Serving Louisville, KY, Jefferson County, and nearby counties.`,
+  pathname: "/contact",
+  keywords: [
+    "DMZ Care phone number",
+    "schedule NEMT Louisville",
+    "medical transport contact Kentucky",
+  ],
+});
 
 export default function ContactPage() {
   return (

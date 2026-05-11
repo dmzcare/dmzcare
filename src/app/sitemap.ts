@@ -1,16 +1,21 @@
 import type { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+  const base = getSiteUrl().replace(/\/$/, "");
+  const routes = [
+    { path: "/", priority: 1, changeFrequency: "weekly" as const },
+    { path: "/about", priority: 0.85, changeFrequency: "monthly" as const },
+    { path: "/services", priority: 0.9, changeFrequency: "weekly" as const },
+    { path: "/faqs", priority: 0.75, changeFrequency: "monthly" as const },
+    { path: "/contact", priority: 0.85, changeFrequency: "monthly" as const },
+    { path: "/booking", priority: 0.9, changeFrequency: "weekly" as const },
+  ];
 
-  const paths = ["", "/about", "/services", "/faqs", "/contact", "/booking"];
-
-  return paths.map((path) => ({
-    url: `${base}${path || "/"}`,
+  return routes.map(({ path, priority, changeFrequency }) => ({
+    url: `${base}${path}`,
     lastModified: new Date(),
-    changeFrequency: path === "" ? "weekly" : "monthly",
-    priority: path === "" ? 1 : 0.8,
+    changeFrequency,
+    priority,
   }));
 }

@@ -6,13 +6,21 @@ import { RideReadyCta } from "@/components/about/RideReadyCta";
 import { AboutImageReveal } from "@/components/AboutImageReveal";
 import { BookingForm } from "@/components/forms/BookingForm";
 import { ABOUT_MISSION_IMAGE } from "@/lib/card-images";
+import { ABOUT_OG_IMAGE, pageMetadata } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Us",
-  description: `Learn how ${SITE.name} delivers dependable non-emergency medical transportation across Louisville and the surrounding region.`,
-  alternates: { canonical: "/about" },
-};
+  description: `Learn how ${SITE.name} delivers dependable non-emergency medical transportation across Louisville and the surrounding region — scheduling discipline, dignity on every trip, and partnerships with care teams.`,
+  pathname: "/about",
+  keywords: [
+    "about DMZ Care",
+    "NEMT company Louisville",
+    "medical transport mission",
+    "patient dignity transportation",
+  ],
+  ogImage: ABOUT_OG_IMAGE,
+});
 
 /** Scroll-zoom visual below the about hero (`AboutImageReveal`). */
 const ABOUT_SCROLL_IMG = "/17306.jpg";

@@ -2,13 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BookingForm } from "@/components/forms/BookingForm";
 import { PageIntro } from "@/components/PageIntro";
+import { pageMetadata } from "@/lib/seo";
 import { SERVICE_AREAS, SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Book a Ride",
-  description: `Request non-emergency medical transportation with ${SITE.name}. Share pickup, destination, and mobility needs. Our team confirms details with you.`,
-  alternates: { canonical: "/booking" },
-};
+  description: `Request non-emergency medical transportation with ${SITE.name}. Submit pickup and destination, appointment time, and mobility needs — dispatch confirms vehicle type and details before ride day.`,
+  pathname: "/booking",
+  keywords: [
+    "book NEMT online",
+    "request wheelchair ride Louisville",
+    "schedule medical transportation KY",
+  ],
+});
 
 export default function BookingPage() {
   return (

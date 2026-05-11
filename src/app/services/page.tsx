@@ -3,14 +3,22 @@ import Image from "next/image";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { WhatWeOfferGrid } from "@/components/services/WhatWeOfferGrid";
 import { SERVICES_HERO_IMAGE } from "@/lib/card-images";
+import { pageMetadata } from "@/lib/seo";
 import { SERVICE_AREAS, SITE } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Services",
   description:
-    "Ambulatory and wheelchair-accessible NEMT, hospital coordination, recurring dialysis and infusion routes, and senior-community partnerships in Louisville, KY.",
-  alternates: { canonical: "/services" },
-};
+    "Ambulatory and wheelchair-accessible NEMT in Louisville, KY: hospital coordination, dialysis and infusion routes, therapy and dental visits, behavioral health rides, and senior-community partnerships.",
+  pathname: "/services",
+  keywords: [
+    "wheelchair van services Louisville",
+    "dialysis transportation KY",
+    "hospital outpatient rides",
+    "dental appointment transportation",
+    "behavioral health transport",
+  ],
+});
 
 export default function ServicesPage() {
   return (
