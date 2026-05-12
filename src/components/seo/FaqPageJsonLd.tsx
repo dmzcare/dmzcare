@@ -1,7 +1,7 @@
 import { FAQ_ALL } from "@/lib/faqs";
 import { getSiteUrl } from "@/lib/seo";
 
-/** FAQ rich results — pairs with `/faqs` content. */
+/** FAQ rich results: pairs with `/faqs` content. */
 export function FaqPageJsonLd() {
   const base = getSiteUrl().replace(/\/$/, "");
 

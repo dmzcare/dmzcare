@@ -9,7 +9,7 @@ import { SITE, SITE_LOGO_ICON } from "@/lib/site";
 
 const siteUrl = getSiteUrl();
 
-/** Google Fonts: Sansation — https://fonts.google.com/specimen/Sansation */
+/** Google Fonts (Sansation): https://fonts.google.com/specimen/Sansation */
 const sansation = Sansation({
   variable: "--font-sansation",
   subsets: ["latin"],
@@ -90,7 +90,10 @@ export default function RootLayout({
           Skip to main content
         </a>
         <SiteHeader />
-        <div id="main-content" className="flex flex-1 flex-col">
+        <div
+          id="main-content"
+          className="relative z-0 flex min-h-0 flex-1 flex-col"
+        >
           {children}
         </div>
         <SiteFooter />

@@ -6,23 +6,22 @@ function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
 
-/** Initial image geometry; the image element itself expands to fullscreen. */
-const START_W_VW = 78;
-const START_H_SVH = 54;
-const START_MARGIN_SVH = 18;
-/** Bottom spacing so marginTop + height + marginBottom = 100svh at every progress (edges align together). */
-const START_MARGIN_BOTTOM_SVH = 100 - START_MARGIN_SVH - START_H_SVH;
-/** Larger = slower zoom through the hero scroll range. */
+const START_SCALE = 0.86;
 const HERO_SCROLL_RANGE = 1.92;
 const SMOOTHING = 0.13;
 
+/**
+ * Scroll-zoom image below About hero.
+ * Keeps the full photo visible (no crop) while scaling from 86% -> 100%.
+ */
 export function AboutImageReveal({
   src,
   heroSectionId = "about-hero",
+  alt = "Healthcare professionals collaborating with focus and empathy",
 }: {
   src: string;
-  /** Element whose scroll drives the zoom (typically the hero `<section>` above this block). */
   heroSectionId?: string;
+  alt?: string;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -38,17 +37,8 @@ export function AboutImageReveal({
     let raf = 0;
 
     const applyProgress = (progress: number) => {
-      const marginTop = START_MARGIN_SVH * (1 - progress);
-      const marginBottom = START_MARGIN_BOTTOM_SVH * (1 - progress);
-      const width = START_W_VW + (100 - START_W_VW) * progress;
-      const height = START_H_SVH + (100 - START_H_SVH) * progress;
-
-      image.style.marginTop = `${marginTop}svh`;
-      image.style.marginBottom = `${marginBottom}svh`;
-      image.style.marginLeft = "auto";
-      image.style.marginRight = "auto";
-      image.style.width = `${width}vw`;
-      image.style.height = `${height}svh`;
+      const scale = START_SCALE + (1 - START_SCALE) * progress;
+      image.style.transform = `scale(${scale})`;
     };
 
     const measureTargetProgress = () => {
@@ -86,7 +76,6 @@ export function AboutImageReveal({
       }
 
       const next = current + (target - current) * SMOOTHING;
-
       currentProgressRef.current = Math.abs(target - next) < 0.001 ? target : next;
       applyProgress(currentProgressRef.current);
 
@@ -126,26 +115,20 @@ export function AboutImageReveal({
     <section
       ref={sectionRef}
       id="about-visual"
-      className="about-visual-scroll relative -mt-[28vh] h-[115vh] bg-dmz-white"
+      className="relative z-0 -mt-[18vh] h-[115vh] bg-dmz-white"
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- Scroll-driven geometry must target a real <img>; next/image wraps extra layout. */}
-      <img
-        ref={imageRef}
-        src={src}
-        alt="Healthcare professionals collaborating with focus and empathy"
-        className="about-visual-image sticky top-0 block max-w-none object-cover"
-        loading="eager"
-        decoding="async"
-        fetchPriority="high"
-        style={{
-          marginTop: `${START_MARGIN_SVH}svh`,
-          marginBottom: `${START_MARGIN_BOTTOM_SVH}svh`,
-          marginLeft: "auto",
-          marginRight: "auto",
-          width: `${START_W_VW}vw`,
-          height: `${START_H_SVH}svh`,
-        }}
-      />
+      <div className="sticky top-0 flex h-svh items-center justify-center overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element -- Scroll animation targets a raw img transform. */}
+        <img
+          ref={imageRef}
+          src={src}
+          alt={alt}
+          className="about-visual-image block h-auto max-h-svh w-auto max-w-full object-contain"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+        />
+      </div>
     </section>
   );
 }

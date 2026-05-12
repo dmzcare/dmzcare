@@ -20,9 +20,9 @@ function QuickLinkArrow() {
 
 export function SiteFooter() {
   return (
-    <footer className="bg-dmz-dark text-dmz-soft">
+    <footer className="relative z-20 shrink-0 bg-dmz-dark text-dmz-soft">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-x-12 gap-y-12 md:grid-cols-2 lg:grid-cols-4 [&>div]:min-w-0">
+        <div className="grid grid-cols-1 gap-x-12 gap-y-12 md:grid-cols-2 lg:grid-cols-[minmax(0,1.42fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] [&>div]:min-w-0">
           <div>
             <Link href="/" className="inline-block">
               <Image

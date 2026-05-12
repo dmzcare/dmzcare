@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { cardBackgroundAt } from "@/lib/card-images";
 import { SITE } from "@/lib/site";
 
 function ArrowIcon({ className, inverse }: { className?: string; inverse?: boolean }) {
@@ -55,21 +54,21 @@ function slideSurface(variant: SlideVariant) {
 const SLIDES = [
   {
     no: "01",
-    image: cardBackgroundAt(0),
+    image: "/assisting_with_accessible_transport_entry.webp",
     title: "Everyone Deserves Access",
     body: `At ${SITE.name}, we believe everyone deserves access to safe, reliable, and respectful transportation to healthcare appointments. Anchored in ${SITE.fullAddress}, our mission is to give our communities more than a ride, with a steady hand at the door and calm for families who are already carrying enough.`,
     variant: "dark" as const,
   },
   {
     no: "02",
-    image: cardBackgroundAt(1),
+    image: "/hero%202.webp",
     title: "Safe Travel",
     body: "Dependable vehicles, trained operators, and careful coordination so every trip to care arrives on time and under control.",
     variant: "accent" as const,
   },
   {
     no: "03",
-    image: cardBackgroundAt(2),
+    image: "/wheelchair_transport_assistance_in_a_van.webp",
     title: "Compassionate Care",
     body: "Respectful assistance at the curb and in the cabin, with patient-centered language, patience with mobility needs, and dignity by default.",
     variant: "white" as const,

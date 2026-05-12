@@ -3,15 +3,15 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SITE } from "@/lib/site";
 
 /** Large hero (right column desktop; top strip mobile) */
-const HERO_MAIN = "/17306.jpg";
+const HERO_MAIN = "/hero1.webp";
 /** Small inset left of copy (mobile overlay + desktop left column) */
-const HERO_INSET = "/full-shot-friends-taking-selfie-together-681x1024.jpg";
+const HERO_INSET = "/friendly_call_center_professional_at_work.webp";
 
 export function Hero() {
   return (
-    <section className="relative z-10 overflow-hidden bg-dmz-dark lg:min-h-[calc(100dvh-3.5rem)]">
+    <section className="relative z-10 overflow-hidden bg-black lg:min-h-[calc(100dvh-3.5rem)]">
       {/* Mobile: full-width photo + overlapping framed inset */}
-      <div className="relative z-10 w-full pb-[max(4rem,calc(520px+2.75rem-min(52vh,420px)+1.5rem))] lg:hidden">
+      <div className="relative z-10 w-full pb-[max(4rem,calc(400px+2.75rem-min(52vh,420px)+1.5rem))] lg:hidden">
         <div className="relative z-0 h-[min(52vh,420px)] w-full">
           <Image
             src={HERO_MAIN}
@@ -23,14 +23,14 @@ export function Hero() {
           />
         </div>
         <div className="pointer-events-none absolute inset-x-0 top-9 z-10 pl-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] pr-4 sm:top-11">
-          <div className="relative h-[520px] w-full overflow-hidden">
+          <div className="relative h-[400px] w-full overflow-hidden">
             <Image
               src={HERO_INSET}
-              alt="Community members sharing a moment together"
+              alt="Friendly call center professional assisting callers"
               fill
               loading="lazy"
               className="object-cover object-center"
-              sizes="(max-width: 1024px) 90vw, 277px"
+              sizes="(max-width: 1024px) 90vw, 400px"
             />
           </div>
         </div>
@@ -47,17 +47,17 @@ export function Hero() {
             </div>
 
             <h1 className="font-heading mt-8 max-w-3xl text-[clamp(2.25rem,5vw,3.75rem)] font-bold leading-[1.08] tracking-tight text-white sm:mt-10">
-              Dependable Medical Transportation For Every Ride
+              Non-Emergency Medical Transportation in Louisville, KY You Can Trust
             </h1>
 
-            <div className="mt-3 grid gap-5 sm:mt-4 lg:grid-cols-[minmax(0,277px)_minmax(0,1fr)] lg:items-start lg:gap-10">
-              <div className="relative mx-auto hidden h-[400px] w-full max-w-[277px] shrink-0 overflow-hidden lg:mx-0 lg:block lg:w-[277px] lg:max-w-none">
+            <div className="mt-3 grid gap-5 sm:mt-4 lg:grid-cols-[minmax(0,400px)_minmax(0,1fr)] lg:items-start lg:gap-10">
+              <div className="relative mx-auto hidden h-[300px] w-full max-w-[400px] shrink-0 overflow-hidden lg:mx-0 lg:block lg:w-[400px] lg:max-w-none">
                 <Image
                   src={HERO_INSET}
-                  alt="Community members sharing a moment together"
+                  alt="Friendly call center professional assisting callers"
                   fill
                   className="object-cover object-center"
-                  sizes="277px"
+                  sizes="400px"
                 />
               </div>
 

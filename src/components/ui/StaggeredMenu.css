@@ -1,4 +1,4 @@
-/* Right stagger drawer — mobile/tablet only (lg:hidden on root in TSX) */
+/* Right stagger drawer: mobile/tablet only (lg:hidden on root in TSX) */
 
 .staggered-menu-root {
   isolation: isolate;
@@ -6,7 +6,7 @@
 
 /*
   Pre-layers only: off-screen before GSAP runs (avoids colored stripe flash).
-  Panel transform is owned exclusively by GSAP — a CSS transform here fought inline
+  Panel transform is owned exclusively by GSAP; a CSS transform here fought inline
   tweens and could leave the drawer stuck off-screen after open.
 */
 .staggered-menu-root[data-side="right"] .sm-prelayer {
@@ -17,7 +17,7 @@
   transform: translate3d(-100%, 0, 0);
 }
 
-/* Hide panel until useLayoutEffect runs gsap.set — no white flash, no CSS/GSAP transform war */
+/* Hide panel until useLayoutEffect runs gsap.set; no white flash, no CSS/GSAP transform war */
 .staggered-menu-panel:not(.sm-panel--armed) {
   opacity: 0;
   visibility: hidden;
@@ -48,7 +48,7 @@
   right: 0;
   z-index: 10;
   width: clamp(280px, 86vw, 420px);
-  /* pointer-events toggled in TSX: auto only when open — avoids trapping taps on the header menu button */
+  /* pointer-events toggled in TSX: auto only when open; avoids trapping taps on the header menu button */
   background: var(--dmz-white, #ffffff);
   overflow-y: auto;
   overscroll-behavior: contain;

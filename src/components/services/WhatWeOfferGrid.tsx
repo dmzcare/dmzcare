@@ -1,6 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { cardBackgroundAt } from "@/lib/card-images";
+import {
+  ADULTS_DAY_CARE_FACILITIES_CARD_IMAGE,
+  BEHAVIORAL_MENTAL_HEALTH_CARD_IMAGE,
+  DENTAL_APPOINTMENTS_CARD_IMAGE,
+  DIALYSIS_TREATMENTS_CARD_IMAGE,
+  DOCTOR_VISITS_CARD_IMAGE,
+  HOSPITAL_OUTPATIENT_SERVICES_CARD_IMAGE,
+  PHYSICAL_THERAPY_SESSIONS_CARD_IMAGE,
+} from "@/lib/card-images";
 import { SERVICE_OFFERINGS } from "@/lib/site";
 
 type Plate = "dark" | "accent" | "gray" | "white" | "orange";
@@ -14,7 +22,7 @@ type ServiceBlock = {
   image: string;
 };
 
-/** Six appointment-type tiles; used on the Services page (masonry grid). */
+/** Appointment-type tiles; used on the Services page (masonry grid). */
 const SERVICE_BLOCKS: ServiceBlock[] = [
   {
     slug: SERVICE_OFFERINGS[0].slug,
@@ -22,7 +30,7 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     description:
       "Door-to-clinic rides that keep annual exams, specialty consults, and imaging days steady. Arrivals lined up with registration and labs.",
     plate: "dark",
-    image: cardBackgroundAt(0),
+    image: DOCTOR_VISITS_CARD_IMAGE,
   },
   {
     slug: SERVICE_OFFERINGS[1].slug,
@@ -30,7 +38,7 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     description:
       "Chair-time fidelity for dialysis and infusion: recurring routes planned so tight treatment windows stay dependable visit after visit.",
     plate: "accent",
-    image: cardBackgroundAt(1),
+    image: DIALYSIS_TREATMENTS_CARD_IMAGE,
   },
   {
     slug: SERVICE_OFFERINGS[2].slug,
@@ -38,7 +46,7 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     description:
       "Timed around rehab gains, with extra patience at pickup when braces, soreness, or gait aids slow each step.",
     plate: "gray",
-    image: cardBackgroundAt(2),
+    image: PHYSICAL_THERAPY_SESSIONS_CARD_IMAGE,
   },
   {
     slug: SERVICE_OFFERINGS[3].slug,
@@ -46,7 +54,7 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     description:
       "Same-day suites handled with coordinated arrivals, then a composed ride home while discharge guidance is still top of mind.",
     plate: "white",
-    image: cardBackgroundAt(3),
+    image: HOSPITAL_OUTPATIENT_SERVICES_CARD_IMAGE,
   },
   {
     slug: SERVICE_OFFERINGS[4].slug,
@@ -54,15 +62,23 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     description:
       "Respectful transportation to therapy, psychiatry, IOP, and related visits. Details stay private from booking through drop-off.",
     plate: "dark",
-    image: cardBackgroundAt(4),
+    image: BEHAVIORAL_MENTAL_HEALTH_CARD_IMAGE,
   },
   {
     slug: SERVICE_OFFERINGS[5].slug,
     title: SERVICE_OFFERINGS[5].label,
     description:
+      "Reliable pickup and return for adult day programs, aligned with facility schedules, friendly curb assistance, and calm rides home after a full day of activities.",
+    plate: "accent",
+    image: ADULTS_DAY_CARE_FACILITIES_CARD_IMAGE,
+  },
+  {
+    slug: SERVICE_OFFERINGS[6].slug,
+    title: SERVICE_OFFERINGS[6].label,
+    description:
       "Quick hops for cleanings or longer rides after oral surgery, with a softer trip home when jaws ache or dizziness lingers.",
     plate: "orange",
-    image: cardBackgroundAt(5),
+    image: DENTAL_APPOINTMENTS_CARD_IMAGE,
   },
 ];
 
@@ -146,7 +162,7 @@ function OfferCard({
       </span>
 
       <h3
-        className={`font-heading relative z-[4] text-lg leading-snug tracking-tight transition-colors duration-300 ease-out group-hover:text-white sm:text-xl ${s.title}`}
+        className={`font-heading relative z-[4] text-lg leading-snug tracking-tight transition-colors duration-300 ease-out group-hover:text-white sm:text-xl !font-bold ${s.title}`}
       >
         {block.title}
       </h3>
@@ -165,20 +181,21 @@ type WhatWeOfferGridProps = {
 };
 
 export function WhatWeOfferGrid({ hideFooterServicesLink = false }: WhatWeOfferGridProps) {
-  const [b1, b2, b3, b4, b5, b6] = SERVICE_BLOCKS;
+  const [b1, b2, b3, b4, b5, b6, b7] = SERVICE_BLOCKS;
 
   return (
-    <section className="overflow-hidden bg-dmz-soft" aria-labelledby="services-preview-heading">
+    <section className="relative z-10 overflow-hidden bg-dmz-soft" aria-labelledby="services-preview-heading">
       <div className="mx-auto max-w-7xl px-4 pb-14 pt-20 sm:px-6 sm:pb-16 sm:pt-24 lg:px-8 lg:pb-20 lg:pt-28">
         <div className="mt-2 w-full shadow-[0_28px_64px_-28px_rgba(26,26,26,0.35)]">
           <div className="services-preview-grid">
-            <IntroPanel />
             <OfferCard index={0} block={b1} gridArea="c01" className="lg:min-h-[17rem]" />
             <OfferCard index={1} block={b2} gridArea="c02" />
             <OfferCard index={2} block={b3} gridArea="c03" />
             <OfferCard index={3} block={b4} gridArea="c04" />
-            <OfferCard index={4} block={b5} gridArea="c05" className="lg:min-h-[17rem]" />
-            <OfferCard index={5} block={b6} gridArea="c06" className="min-h-[16rem] lg:min-h-0" />
+            <OfferCard index={4} block={b6} gridArea="c07" className="min-h-[16rem] lg:min-h-[17rem]" />
+            <OfferCard index={5} block={b5} gridArea="c05" className="lg:min-h-[17rem]" />
+            <OfferCard index={6} block={b7} gridArea="c06" className="lg:h-full lg:min-h-0" />
+            <IntroPanel />
           </div>
         </div>
 
@@ -206,7 +223,7 @@ function IntroPanel() {
       <p className="text-xs font-semibold uppercase tracking-[0.28em] text-dmz-text">What we offer</p>
       <h2
         id="services-preview-heading"
-        className="font-heading mt-4 text-[clamp(1.65rem,3.5vw,2.35rem)] leading-[1.15] tracking-tight text-dmz-dark"
+        className="font-heading mt-4 text-[clamp(1.65rem,3.5vw,2.35rem)] leading-[1.15] tracking-tight text-dmz-dark !font-bold"
       >
         Medical Transportation For Every Appointment
       </h2>

@@ -3,7 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { cardBackgroundAt } from "@/lib/card-images";
+import {
+  ADULTS_DAY_CARE_FACILITIES_CARD_IMAGE,
+  BEHAVIORAL_MENTAL_HEALTH_CARD_IMAGE,
+  DENTAL_APPOINTMENTS_CARD_IMAGE,
+  DIALYSIS_TREATMENTS_CARD_IMAGE,
+  DOCTOR_VISITS_CARD_IMAGE,
+  HOSPITAL_OUTPATIENT_SERVICES_CARD_IMAGE,
+  PHYSICAL_THERAPY_SESSIONS_CARD_IMAGE,
+} from "@/lib/card-images";
 
 function Bullet({
   children,
@@ -40,16 +48,14 @@ type ServiceBlock = {
   plate: Plate;
 };
 
-const CARD_IMAGE_ALT = "DMZ Care transportation and community photography";
-
 const SERVICE_BLOCKS: ServiceBlock[] = [
   {
     title: "Doctor Visits",
     description:
       "Door-to-clinic rides that keep annual exams, specialty consults, and imaging days steady. Arrivals lined up with registration and labs.",
     bullets: ["On-time pickup", "Caring drivers", "Stress-free travel"],
-    image: cardBackgroundAt(0),
-    imageAlt: CARD_IMAGE_ALT,
+    image: DOCTOR_VISITS_CARD_IMAGE,
+    imageAlt: "Physical therapy and rehabilitation setting",
     plate: "dark",
   },
   {
@@ -57,8 +63,8 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     description:
       "Chair-time fidelity for dialysis and infusion: recurring routes planned so tight treatment windows stay dependable visit after visit.",
     bullets: ["Easy Schedule", "Patient assistance", "Clean vehicles"],
-    image: cardBackgroundAt(1),
-    imageAlt: CARD_IMAGE_ALT,
+    image: DIALYSIS_TREATMENTS_CARD_IMAGE,
+    imageAlt: "Patient in a modern dialysis clinic",
     plate: "accent",
   },
   {
@@ -66,8 +72,8 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     description:
       "Timed around rehab gains, with extra patience at pickup when braces, soreness, or gait aids slow each step.",
     bullets: ["Flexible booking", "Assisted mobility", "Safe rides"],
-    image: cardBackgroundAt(2),
-    imageAlt: CARD_IMAGE_ALT,
+    image: PHYSICAL_THERAPY_SESSIONS_CARD_IMAGE,
+    imageAlt: "Doctor appointment and medical visit setting",
     plate: "gray",
   },
   {
@@ -75,8 +81,8 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     description:
       "Same-day suites handled with coordinated arrivals, then a composed ride home while discharge guidance is still top of mind.",
     bullets: ["Safe return trips", "Friendly drivers", "Comfortable"],
-    image: cardBackgroundAt(3),
-    imageAlt: CARD_IMAGE_ALT,
+    image: HOSPITAL_OUTPATIENT_SERVICES_CARD_IMAGE,
+    imageAlt: "Supportive care in a welcoming medical hallway",
     plate: "white",
   },
   {
@@ -84,8 +90,8 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     description:
       "Respectful transportation to therapy, psychiatry, IOP, and related visits. Details stay private from booking through drop-off.",
     bullets: ["Confidential scheduling", "Dignified language", "Reliable pickups"],
-    image: cardBackgroundAt(4),
-    imageAlt: CARD_IMAGE_ALT,
+    image: BEHAVIORAL_MENTAL_HEALTH_CARD_IMAGE,
+    imageAlt: "Therapy session in a calm care setting",
     plate: "dark",
   },
   {
@@ -93,9 +99,18 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     description:
       "Quick hops for cleanings or longer rides after oral surgery, with a softer trip home when jaws ache or dizziness lingers.",
     bullets: ["Timely arrivals", "Easy scheduling", "Comfortable seating"],
-    image: cardBackgroundAt(5),
-    imageAlt: CARD_IMAGE_ALT,
+    image: DENTAL_APPOINTMENTS_CARD_IMAGE,
+    imageAlt: "Dental appointment care setting",
     plate: "orange",
+  },
+  {
+    title: "Adults Day Care Facilities",
+    description:
+      "Door-through-door service for adult day centers: pickups that respect program start times, patient escorts at the curb, and return trips when the day wraps.",
+    bullets: ["Facility-aligned timing", "Respectful assistance", "Consistent drivers"],
+    image: ADULTS_DAY_CARE_FACILITIES_CARD_IMAGE,
+    imageAlt: "Adults day care facility setting",
+    plate: "accent",
   },
 ];
 

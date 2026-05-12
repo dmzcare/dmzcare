@@ -13,7 +13,7 @@ import {
   type StaggeredMenuItem,
 } from "@/components/ui/StaggeredMenu";
 
-/** Desktop center nav omits FAQs & Book a ride (CTA covers booking). */
+/** Desktop center nav omits FAQs & Book a Ride (CTA covers booking). */
 const DESKTOP_NAV_LINKS = NAV_LINKS.filter(
   (link) => link.href !== "/faqs" && link.href !== "/booking",
 );
@@ -222,7 +222,7 @@ export function SiteHeader() {
             href="/booking"
             className="!hidden lg:!inline-flex"
           >
-            Book a ride
+            Book a Ride
           </ButtonLink>
           <button
             ref={menuToggleRef}

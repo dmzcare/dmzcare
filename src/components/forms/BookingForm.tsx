@@ -4,12 +4,13 @@ import { useState } from "react";
 
 const serviceTypes = [
   { value: "", label: "Select service type" },
-  { value: "ambulatory", label: "Ambulatory / escorted" },
-  { value: "wheelchair", label: "Wheelchair accessible" },
-  { value: "bariatric", label: "Bariatric / extra assistance (note in details)" },
-  { value: "stretcher", label: "Stretcher (if offered; confirm by phone)" },
-  { value: "recurring", label: "Recurring appointment series" },
-  { value: "other", label: "Other / not sure" },
+  { value: "nemt", label: "NEMT" },
+  { value: "ambulatory-transport", label: "Ambulatory Transport" },
+  { value: "door-to-door-assistance", label: "Door-To-Door Assistance" },
+  { value: "recurring-trips", label: "Recurring Trips" },
+  { value: "hospital-discharge", label: "Hospital Discharge" },
+  { value: "pharmacy-trips", label: "Pharmacy Trips" },
+  { value: "other-not-sure", label: "Other / Not Sure" },
 ];
 
 export function BookingForm() {

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ABOUT_MISSION_IMAGE } from "@/lib/card-images";
 import { SITE } from "@/lib/site";
 
 /** Heroicons 24 solid Phone (MIT); reads clearly on small badge backgrounds */
@@ -13,9 +14,6 @@ function PhoneIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
-/** Local photography from /public */
-const ABOUT_PHOTO = "/1675.jpg";
 
 const ABOUT_PATTERN = "/Pattern%20DMZ%20Care%20Logo.webp";
 
@@ -40,8 +38,8 @@ export function AboutSummary() {
         <div className="relative mb-12 lg:mb-0 lg:w-7/12">
           <div className="relative aspect-[5/4] min-h-[280px] overflow-hidden ring-1 ring-dmz-border sm:min-h-[340px] lg:aspect-[6/5] lg:min-h-[min(520px,52vh)]">
             <Image
-              src={ABOUT_PHOTO}
-              alt="DMZ Care team and riders focused on safe, respectful transportation"
+              src={ABOUT_MISSION_IMAGE}
+              alt="Warm greeting outside a suburban home, reflecting approachable transportation care"
               fill
               sizes="(max-width: 1023px) 100vw, 58vw"
               className="object-cover"

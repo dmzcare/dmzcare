@@ -70,8 +70,7 @@ const reasons: Reason[] = [
   },
 ];
 
-const WHY_CHOOSE_BG =
-  "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=2400&q=100";
+const WHY_CHOOSE_BG = "/caregiver_assisting_elderly_woman_to_vehicle.webp";
 
 const fixedCover: CSSProperties = {
   backgroundSize: "cover",
@@ -86,14 +85,11 @@ const photoLayerStyle: CSSProperties = {
   filter: "grayscale(1) contrast(1.08)",
 };
 
-/** Dark navy overlay (reference-style) so header + cards read clearly; subtle lime at bottom for brand. */
+/** Black overlay so headline + cards stay readable over the photo. */
 const darkOverlayStyle: CSSProperties = {
   ...fixedCover,
   backgroundImage:
-    "linear-gradient(to top, rgba(202, 244, 2, 0.08), transparent 35%), linear-gradient(to bottom, rgba(15, 23, 42, 0.92) 0%, rgba(26, 26, 26, 0.82) 45%, rgba(15, 23, 42, 0.94) 100%)",
-  backgroundAttachment: "fixed, fixed",
-  backgroundSize: "cover, cover",
-  backgroundPosition: "center, center",
+    "linear-gradient(to bottom, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.68) 45%, rgba(0, 0, 0, 0.86) 100%)",
 };
 
 export function WhyChoose() {

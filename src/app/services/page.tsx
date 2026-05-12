@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { ServicesPreview } from "@/components/home/ServicesPreview";
 import { WhatWeOfferGrid } from "@/components/services/WhatWeOfferGrid";
 import { SERVICES_HERO_IMAGE } from "@/lib/card-images";
-import { pageMetadata } from "@/lib/seo";
+import { pageMetadata, SERVICES_PAGE_OG_IMAGE } from "@/lib/seo";
 import { SERVICE_AREAS, SITE } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
@@ -11,6 +12,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Ambulatory and wheelchair-accessible NEMT in Louisville, KY: hospital coordination, dialysis and infusion routes, therapy and dental visits, behavioral health rides, and senior-community partnerships.",
   pathname: "/services",
+  ogImage: SERVICES_PAGE_OG_IMAGE,
   keywords: [
     "wheelchair van services Louisville",
     "dialysis transportation KY",
@@ -23,26 +25,30 @@ export const metadata: Metadata = pageMetadata({
 export default function ServicesPage() {
   return (
     <>
+      {/* Fixed beneath page content: sections below scroll over this layer */}
+      <div
+        className="pointer-events-none fixed inset-x-0 top-14 z-0 h-[calc(100dvh-3.5rem)]"
+        aria-hidden
+      >
+        <Image
+          src={SERVICES_HERO_IMAGE}
+          alt=""
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-black/78 via-black/65 to-black/84"
+          aria-hidden
+        />
+      </div>
+
       <section
-        className="relative flex min-h-[calc(100dvh-3.5rem)] flex-col justify-center overflow-hidden bg-dmz-dark"
+        className="relative z-10 flex min-h-[calc(100dvh-3.5rem)] flex-col justify-center"
         aria-labelledby="services-hero-heading"
       >
-        <div className="pointer-events-none absolute inset-0">
-          <Image
-            src={SERVICES_HERO_IMAGE}
-            alt=""
-            fill
-            priority
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-          <div
-            className="absolute inset-0 bg-gradient-to-b from-dmz-dark/92 via-dmz-dark/88 to-dmz-dark/95"
-            aria-hidden
-          />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-white/55">
             Services
           </p>
@@ -59,10 +65,17 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <WhatWeOfferGrid hideFooterServicesLink />
+      {/* Mobile / tablet: same sticky scroll deck as homepage */}
+      <div className="relative z-10 lg:hidden">
+        <ServicesPreview />
+      </div>
+
+      <div className="relative z-10 hidden lg:block">
+        <WhatWeOfferGrid hideFooterServicesLink />
+      </div>
 
       <section
-        className="border-t border-dmz-border bg-dmz-white pb-16 pt-14 sm:pb-20 sm:pt-16 lg:pb-28 lg:pt-20"
+        className="relative z-10 border-t border-dmz-border bg-dmz-white pb-16 pt-14 sm:pb-20 sm:pt-16 lg:pb-28 lg:pt-20"
         aria-labelledby="services-contact-heading"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

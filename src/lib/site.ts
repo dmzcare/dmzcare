@@ -2,9 +2,9 @@
 export const SITE = {
   name: "DMZ Care",
   tagline: "Non-emergency medical transportation in Louisville and surrounding communities.",
-  phoneDisplay: "331-269-8740",
-  phoneTel: "+13312698740",
-  email: "hello@dmzcare.com",
+  phoneDisplay: "502-236-2820",
+  phoneTel: "+15022362820",
+  email: "info@dmzcare.com",
   city: "Louisville",
   state: "KY",
   fullAddress: "Louisville, Kentucky",
@@ -46,6 +46,7 @@ export const SERVICE_OFFERINGS = [
   { slug: "physical-therapy-sessions", label: "Physical Therapy Sessions" },
   { slug: "hospital-outpatient-services", label: "Hospital Outpatient Services" },
   { slug: "behavioral-mental-health-appointments", label: "Behavioral & Mental Health Appointments" },
+  { slug: "adults-day-care-facilities", label: "Adults Day Care Facilities" },
   { slug: "dental-appointments", label: "Dental Appointments" },
 ] as const;
 

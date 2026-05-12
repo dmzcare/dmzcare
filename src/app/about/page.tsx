@@ -11,7 +11,7 @@ import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "About Us",
-  description: `Learn how ${SITE.name} delivers dependable non-emergency medical transportation across Louisville and the surrounding region — scheduling discipline, dignity on every trip, and partnerships with care teams.`,
+  description: `Learn how ${SITE.name} delivers dependable non-emergency medical transportation across Louisville and the surrounding region. Scheduling discipline, dignity on every trip, and partnerships with care teams.`,
   pathname: "/about",
   keywords: [
     "about DMZ Care",
@@ -23,7 +23,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 /** Scroll-zoom visual below the about hero (`AboutImageReveal`). */
-const ABOUT_SCROLL_IMG = "/17306.jpg";
+const ABOUT_SCROLL_IMG = "/hero%202.webp";
 
 const ABOUT_INTRO = `${SITE.name} exists because getting to care should never be the hardest part of the day. We combine disciplined scheduling with a human touch, so riders feel steady, not rushed.`;
 
@@ -32,7 +32,7 @@ export default function AboutPage() {
     <>
       <section
         id="about-hero"
-        className="relative flex min-h-[calc(100svh-76px)] flex-col bg-dmz-white"
+        className="relative z-20 isolate flex min-h-[calc(100svh_-_76px_-_10vh)] flex-col bg-dmz-white"
       >
         <div className="grid flex-1 grid-cols-[minmax(0,0.38fr)_1px_minmax(0,1fr)] items-stretch gap-10 px-4 py-10 sm:gap-12 sm:px-6 md:gap-16 md:px-8 lg:gap-28 lg:px-16 lg:py-24 xl:gap-36 xl:px-24">
           <div className="flex items-center justify-center py-2 md:justify-end md:py-8">
@@ -50,11 +50,11 @@ export default function AboutPage() {
 
         <a
           href="#about-visual"
-          className="group absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center gap-2 text-[0.58rem] font-semibold uppercase tracking-[0.22em] text-dmz-dark/55 transition hover:text-dmz-dark sm:bottom-12"
+          className="group absolute bottom-28 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 rounded-full border border-dmz-border/80 bg-white/95 px-4 py-2.5 text-[0.58rem] font-semibold uppercase tracking-[0.22em] text-dmz-dark shadow-[0_10px_28px_-14px_rgba(26,26,26,0.35)] backdrop-blur-sm transition hover:border-dmz-dark/25 hover:bg-white hover:text-dmz-dark sm:bottom-32 lg:bottom-36"
           aria-label="Scroll to explore the about page"
         >
-          <span className="grid size-4 place-items-center rounded-full border border-dmz-dark/25 transition group-hover:border-dmz-dark/50">
-            <span className="size-1 rounded-full bg-dmz-dark/45" />
+          <span className="grid size-4 place-items-center rounded-full border border-dmz-dark/30 transition group-hover:border-dmz-dark/55">
+            <span className="size-1 rounded-full bg-dmz-dark/55" />
           </span>
           Scroll to explore
         </a>
@@ -67,14 +67,13 @@ export default function AboutPage() {
       <section className="bg-dmz-soft">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:flex lg:items-center lg:gap-16 lg:px-8 lg:py-28">
           <div className="relative mb-12 lg:mb-0 lg:w-7/12">
-            <div className="aspect-[5/4] min-h-[280px] overflow-hidden ring-1 ring-dmz-border sm:min-h-[340px] lg:aspect-[6/5] lg:min-h-[min(520px,52vh)]">
+            <div className="relative aspect-[5/4] min-h-[280px] overflow-hidden ring-1 ring-dmz-border sm:min-h-[340px] lg:aspect-[6/5] lg:min-h-[min(520px,52vh)]">
               <Image
                 src={ABOUT_MISSION_IMAGE}
-                alt="Community members together outdoors, reflecting inclusive transportation care"
-                width={681}
-                height={1024}
+                alt="Warm greeting outside a suburban home, reflecting approachable transportation care"
+                fill
                 sizes="(max-width: 1023px) 100vw, 58vw"
-                className="h-full w-full object-cover"
+                className="object-cover"
               />
             </div>
             <div className="absolute -right-2 top-8 hidden bg-dmz-accent px-4 py-3 text-sm font-semibold text-dmz-dark sm:block">
@@ -119,7 +118,7 @@ export default function AboutPage() {
             </h2>
             <p className="mt-4 text-base leading-relaxed text-dmz-text">
               Share pickup and destination, timing, and mobility needs. Dispatch will confirm vehicle type and
-              details before ride day—same form as our{" "}
+              details before ride day. Same form as our{" "}
               <a href="/booking" className="font-semibold text-dmz-dark underline underline-offset-4 hover:text-dmz-text">
                 booking page
               </a>

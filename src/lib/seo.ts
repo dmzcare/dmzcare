@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SERVICES_HERO_IMAGE } from "@/lib/card-images";
 import { SITE } from "@/lib/site";
 
 /** Resolved site origin for canonical URLs, OG/Twitter, JSON-LD, and sitemap. */
@@ -22,17 +23,24 @@ export function siteVerification(): Metadata["verification"] | undefined {
 }
 
 /**
- * Default social preview image — local hero asset used on `/services`, consistent branding.
- * Recommended ratio for OG is ~1.91:1; this asset is close and avoids hotlinking stock CDNs.
+ * Default social preview image: matches homepage hero (`/public/hero 2.webp`).
  */
 export const DEFAULT_OG_IMAGE = {
-  url: "/55888-1024x574.jpg",
-  width: 1024,
-  height: 574,
+  url: "/hero%202.webp",
+  width: 1442,
+  height: 1091,
   alt: "Non-emergency medical transportation vehicle and care-focused service in Louisville, Kentucky",
 } as const;
 
-/** About page — scroll hero still from `/public` for a distinct preview when shared. */
+/** Open Graph / Twitter image for `/services` (matches {@link SERVICES_HERO_IMAGE}). */
+export const SERVICES_PAGE_OG_IMAGE = {
+  url: SERVICES_HERO_IMAGE,
+  width: 1448,
+  height: 1086,
+  alt: "Non-emergency medical transportation vehicle and care-focused service in Louisville, Kentucky",
+} as const;
+
+/** About page: scroll hero still from `/public` for a distinct preview when shared. */
 export const ABOUT_OG_IMAGE = {
   url: "/17306.jpg",
   width: 2000,

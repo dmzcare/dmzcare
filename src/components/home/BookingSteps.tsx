@@ -6,6 +6,7 @@ type Step = {
   body: string;
   panelClass: string;
   watermarkClass: string;
+  watermarkHoverClass: string;
   headingClass: string;
   bodyClass: string;
 };
@@ -16,8 +17,8 @@ const steps: Step[] = [
     title: "Request your ride online or by phone",
     body: "Submit your pickup, destination, and timing online or with a quick call.",
     panelClass: "bg-dmz-accent",
-    watermarkClass:
-      "text-transparent [-webkit-text-stroke:1.5px_rgba(26,26,26,0.14)] sm:[-webkit-text-stroke:2px_rgba(26,26,26,0.14)]",
+    watermarkClass: "text-dmz-dark/16",
+    watermarkHoverClass: "group-hover:text-dmz-dark/32",
     headingClass: "text-dmz-dark",
     bodyClass: "text-dmz-dark/85",
   },
@@ -26,8 +27,8 @@ const steps: Step[] = [
     title: "We confirm your details",
     body: "Dispatch confirms addresses, entrances, and vehicle fit before ride day.",
     panelClass: "bg-dmz-soft",
-    watermarkClass:
-      "text-transparent [-webkit-text-stroke:1.5px_rgba(26,26,26,0.11)] sm:[-webkit-text-stroke:2px_rgba(26,26,26,0.11)]",
+    watermarkClass: "text-dmz-dark/14",
+    watermarkHoverClass: "group-hover:text-dmz-dark/28",
     headingClass: "text-dmz-dark",
     bodyClass: "text-dmz-text",
   },
@@ -36,8 +37,8 @@ const steps: Step[] = [
     title: "Your driver arrives on time",
     body: "Your driver arrives in the agreed window, with updates if anything shifts.",
     panelClass: "bg-dmz-orange",
-    watermarkClass:
-      "text-transparent [-webkit-text-stroke:1.5px_rgba(255,255,255,0.18)] sm:[-webkit-text-stroke:2px_rgba(255,255,255,0.18)]",
+    watermarkClass: "text-white/18",
+    watermarkHoverClass: "group-hover:text-white/36",
     headingClass: "text-white",
     bodyClass: "text-white/90",
   },
@@ -98,16 +99,16 @@ export function BookingSteps() {
             {steps.map((s) => (
               <article
                 key={s.step}
-                className={`relative flex min-h-[220px] flex-col px-6 pb-8 pt-16 sm:min-h-[240px] sm:pt-18 lg:min-h-[260px] lg:px-7 lg:pb-10 lg:pt-20 ${s.panelClass}`}
+                className={`group relative flex min-h-[220px] flex-col px-6 pb-8 pt-18 sm:min-h-[240px] sm:pt-20 lg:min-h-[260px] lg:px-7 lg:pb-10 lg:pt-22 ${s.panelClass}`}
               >
                 <span
-                  className={`pointer-events-none absolute right-2 top-2 select-none font-heading text-[3rem] font-bold leading-none tracking-[-0.1em] tabular-nums sm:right-4 sm:top-3 sm:text-[4rem] lg:text-[4.25rem] ${s.watermarkClass}`}
+                  className={`pointer-events-none absolute right-2 top-2 select-none font-heading text-[2.5rem] font-bold leading-none tracking-wide tabular-nums transition-colors duration-200 ease-out sm:right-4 sm:top-3 sm:text-[3.25rem] lg:text-[3.5rem] ${s.watermarkClass} ${s.watermarkHoverClass}`}
                   aria-hidden
                 >
                   {s.step}.
                 </span>
                 <h3
-                  className={`font-heading relative max-w-[20ch] text-lg font-bold leading-snug ${s.headingClass}`}
+                  className={`font-heading relative mt-2 max-w-[20ch] text-lg font-bold leading-snug ${s.headingClass}`}
                 >
                   {s.title}
                 </h3>

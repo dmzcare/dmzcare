@@ -7,7 +7,7 @@ import { SERVICE_AREAS, SITE } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Book a Ride",
-  description: `Request non-emergency medical transportation with ${SITE.name}. Submit pickup and destination, appointment time, and mobility needs — dispatch confirms vehicle type and details before ride day.`,
+  description: `Request non-emergency medical transportation with ${SITE.name}. Submit pickup and destination, appointment time, and mobility needs. Dispatch confirms vehicle type and details before ride day.`,
   pathname: "/booking",
   keywords: [
     "book NEMT online",
