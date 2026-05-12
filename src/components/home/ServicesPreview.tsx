@@ -12,6 +12,7 @@ import {
   HOSPITAL_OUTPATIENT_SERVICES_CARD_IMAGE,
   PHYSICAL_THERAPY_SESSIONS_CARD_IMAGE,
 } from "@/lib/card-images";
+import { SERVICE_OFFERINGS } from "@/lib/site";
 
 function Bullet({
   children,
@@ -95,15 +96,6 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     plate: "dark",
   },
   {
-    title: "Dental Appointments",
-    description:
-      "Quick hops for cleanings or longer rides after oral surgery, with a softer trip home when jaws ache or dizziness lingers.",
-    bullets: ["Timely arrivals", "Easy scheduling", "Comfortable seating"],
-    image: DENTAL_APPOINTMENTS_CARD_IMAGE,
-    imageAlt: "Dental appointment care setting",
-    plate: "orange",
-  },
-  {
     title: "Adults Day Care Facilities",
     description:
       "Door-through-door service for adult day centers: pickups that respect program start times, patient escorts at the curb, and return trips when the day wraps.",
@@ -111,6 +103,15 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     image: ADULTS_DAY_CARE_FACILITIES_CARD_IMAGE,
     imageAlt: "Adults day care facility setting",
     plate: "accent",
+  },
+  {
+    title: "Dental Appointments",
+    description:
+      "Quick hops for cleanings or longer rides after oral surgery, with a softer trip home when jaws ache or dizziness lingers.",
+    bullets: ["Timely arrivals", "Easy scheduling", "Comfortable seating"],
+    image: DENTAL_APPOINTMENTS_CARD_IMAGE,
+    imageAlt: "Dental appointment care setting",
+    plate: "orange",
   },
 ];
 
@@ -263,7 +264,7 @@ function LayeredServiceCard({
   );
 }
 
-export function ServicesPreview() {
+export function ServicesPreview({ serviceAnchors = false }: { serviceAnchors?: boolean } = {}) {
   const deckRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
 
@@ -352,7 +353,8 @@ export function ServicesPreview() {
         {SERVICE_BLOCKS.map((block, index) => (
           <div
             key={block.title}
-            className={`deck-card relative px-4 sm:px-6 lg:px-8 sticky ${STICKY_TOP_STACKED} ${CARD_SLOT_MIN_HEIGHT}`}
+            id={serviceAnchors ? SERVICE_OFFERINGS[index]?.slug : undefined}
+            className={`deck-card relative px-4 sm:px-6 lg:px-8 sticky ${STICKY_TOP_STACKED} ${CARD_SLOT_MIN_HEIGHT} ${serviceAnchors ? "scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-36" : ""}`}
             ref={(el) => {
               cardRefs.current[index] = el;
             }}

@@ -5,6 +5,7 @@ import { GuidingPrinciplesSlider } from "@/components/about/GuidingPrinciplesSli
 import { RideReadyCta } from "@/components/about/RideReadyCta";
 import { AboutImageReveal } from "@/components/AboutImageReveal";
 import { BookingForm } from "@/components/forms/BookingForm";
+import { WhatWeOfferGrid } from "@/components/services/WhatWeOfferGrid";
 import { ABOUT_MISSION_IMAGE } from "@/lib/card-images";
 import { ABOUT_OG_IMAGE, pageMetadata } from "@/lib/seo";
 import { SITE } from "@/lib/site";
@@ -99,6 +100,10 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <div className="relative z-10">
+        <WhatWeOfferGrid />
+      </div>
 
       <RideReadyCta bookTripHref="#about-book-a-ride" />
 

@@ -137,33 +137,34 @@ body {
 }
 
 /*
-  “What we offer” grid (Services page):
-  lg: row1: doctor | dialysis | PT | hospital; row2: adults | behavioral×2 | dental; row3: intro×3.
+  “What we offer” grid (About page):
+  Mobile: intro then tiles in same reading order as lg (doctor → PT → hospital → dialysis → adults → behavioral → dental).
+  lg: row1 intro×3 + doctor | row2 PT + hospital + dialysis×2 | row3 adults + behavioral×2 + dental.
 */
 .services-preview-grid {
   display: grid;
   gap: 0;
   grid-template-columns: minmax(0, 1fr);
+  /* Same tile order as lg reading order: doctor → PT → hospital → dialysis → adults → behavioral → dental */
   grid-template-areas:
+    "intro"
     "c01"
-    "c02"
     "c03"
     "c04"
+    "c02"
     "c07"
     "c05"
-    "c06"
-    "intro";
+    "c06";
 }
 
 @media (min-width: 1024px) {
   .services-preview-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: auto auto auto;
-    /* Dental (c06): col 4 on rows 2–3; same area name merges vertically */
     grid-template-areas:
-      "c01 c02 c03 c04"
-      "c07 c05 c05 c06"
-      "intro intro intro c06";
+      "intro intro intro c01"
+      "c03 c04 c02 c02"
+      "c07 c05 c05 c06";
   }
 }
 

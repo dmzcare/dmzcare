@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { ServicesPreview } from "@/components/home/ServicesPreview";
-import { WhatWeOfferGrid } from "@/components/services/WhatWeOfferGrid";
 import { SERVICES_HERO_IMAGE } from "@/lib/card-images";
 import { pageMetadata, SERVICES_PAGE_OG_IMAGE } from "@/lib/seo";
 import { SERVICE_AREAS, SITE } from "@/lib/site";
@@ -65,13 +64,9 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Mobile / tablet: same sticky scroll deck as homepage */}
-      <div className="relative z-10 lg:hidden">
-        <ServicesPreview />
-      </div>
-
-      <div className="relative z-10 hidden lg:block">
-        <WhatWeOfferGrid hideFooterServicesLink />
+      {/* Same “What we offer” sticky deck as homepage (all breakpoints) */}
+      <div className="relative z-10">
+        <ServicesPreview serviceAnchors />
       </div>
 
       <section
@@ -79,7 +74,7 @@ export default function ServicesPage() {
         aria-labelledby="services-contact-heading"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-start lg:gap-16">
             <div className="flex flex-col border border-dmz-border bg-dmz-soft p-8 sm:p-10">
               <h2
                 id="services-contact-heading"
