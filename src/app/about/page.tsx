@@ -11,7 +11,7 @@ import { ABOUT_OG_IMAGE, pageMetadata } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Us",
+  title: "About",
   description: `Learn how ${SITE.name} delivers dependable non-emergency medical transportation across Louisville and the surrounding region. Scheduling discipline, dignity on every trip, and partnerships with care teams.`,
   pathname: "/about",
   keywords: [

@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 import { SERVICE_AREAS, SITE } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Contact Us",
+  title: "Contact",
   description: `Reach ${SITE.name} by phone or email for NEMT scheduling, coverage questions, and ride coordination. Serving Louisville, KY, Jefferson County, and nearby counties.`,
   pathname: "/contact",
   keywords: [

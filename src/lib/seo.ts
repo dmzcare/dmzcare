@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import { SERVICES_HERO_IMAGE } from "@/lib/card-images";
 import { SITE } from "@/lib/site";
 
+/** Right-hand side of inner-page titles, e.g. `About — DMZCare.com`. */
+export const SEO_TITLE_BRAND = "DMZCare.com" as const;
+
+/** Homepage `<title>` and primary social title. */
+export const SEO_HOME_TITLE = "DMZCare.com — Non-Emergency Medical Transportation" as const;
+
 /** Resolved site origin for canonical URLs, OG/Twitter, JSON-LD, and sitemap. */
 export function getSiteUrl(): string {
   return (
@@ -66,7 +72,7 @@ export const SEO_BASE_KEYWORDS = [
 ] as const;
 
 export type PageSeoInput = {
-  /** Segment title (root layout applies `%s | ${SITE.name}`). */
+  /** Short page name; root layout template yields `PageName — DMZCare.com`. */
   title: string;
   description: string;
   /** Path including leading slash, e.g. `/about` */
@@ -85,7 +91,7 @@ export type PageSeoInput = {
 /** Full page-level metadata: canonical, keywords, Open Graph, Twitter Card. */
 export function pageMetadata(input: PageSeoInput): Metadata {
   const { title, description, pathname, keywords = [], ogImage = DEFAULT_OG_IMAGE } = input;
-  const ogTitle = `${title} | ${SITE.name}`;
+  const ogTitle = `${title} — ${SEO_TITLE_BRAND}`;
 
   return {
     title,

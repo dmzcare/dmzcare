@@ -6,7 +6,7 @@ import { AppGoogleAnalytics } from "@/components/analytics/AppGoogleAnalytics";
 import { SiteJsonLd } from "@/components/seo/SiteJsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { getSiteUrl, SEO_BASE_KEYWORDS, siteVerification } from "@/lib/seo";
+import { getSiteUrl, SEO_BASE_KEYWORDS, SEO_HOME_TITLE, SEO_TITLE_BRAND, siteVerification } from "@/lib/seo";
 import { SITE, SITE_LOGO_ICON } from "@/lib/site";
 
 const siteUrl = getSiteUrl();
@@ -29,8 +29,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${SITE.name} | Non-Emergency Medical Transportation in Louisville, KY`,
-    template: `%s | ${SITE.name}`,
+    default: SEO_HOME_TITLE,
+    template: `%s — ${SEO_TITLE_BRAND}`,
   },
   description: SITE.tagline,
   applicationName: SITE.name,
@@ -67,12 +67,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     siteName: SITE.name,
-    title: `${SITE.name} | Non-Emergency Medical Transportation in Louisville, KY`,
+    title: SEO_HOME_TITLE,
     description: SITE.tagline,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} | Louisville, KY NEMT`,
+    title: SEO_HOME_TITLE,
     description: SITE.tagline,
   },
 };
@@ -85,6 +85,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${sansation.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="text-dmz-foreground flex min-h-full flex-col bg-dmz-white">
+        {gaMeasurementId ? (
+          <Suspense fallback={null}>
+            <AppGoogleAnalytics gaId={gaMeasurementId} />
+          </Suspense>
+        ) : null}
         <SiteJsonLd />
         <a
           href="#main-content"
@@ -100,11 +105,6 @@ export default function RootLayout({
           {children}
         </div>
         <SiteFooter />
-        {gaMeasurementId ? (
-          <Suspense fallback={null}>
-            <AppGoogleAnalytics gaId={gaMeasurementId} />
-          </Suspense>
-        ) : null}
       </body>
     </html>
   );

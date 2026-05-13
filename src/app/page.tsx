@@ -8,14 +8,13 @@ import { Hero } from "@/components/home/Hero";
 import { ServicesPreview } from "@/components/home/ServicesPreview";
 import { Testimonials } from "@/components/home/Testimonials";
 import { WhyChoose } from "@/components/home/WhyChoose";
-import { DEFAULT_OG_IMAGE, SEO_BASE_KEYWORDS } from "@/lib/seo";
-import { SITE } from "@/lib/site";
+import { DEFAULT_OG_IMAGE, SEO_BASE_KEYWORDS, SEO_HOME_TITLE } from "@/lib/seo";
 
 const HOME_DESCRIPTION =
   "Premium non-emergency medical transportation in Louisville, KY. Wheelchair-accessible rides, facility coordination, and compassionate drivers.";
 
 export const metadata: Metadata = {
-  title: { absolute: `${SITE.name} | Non-Emergency Medical Transportation in Louisville, KY` },
+  title: { absolute: SEO_HOME_TITLE },
   description: HOME_DESCRIPTION,
   keywords: [
     ...SEO_BASE_KEYWORDS,
@@ -25,7 +24,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/" },
   openGraph: {
-    title: `${SITE.name} | Non-Emergency Medical Transportation in Louisville, KY`,
+    title: SEO_HOME_TITLE,
     description: HOME_DESCRIPTION,
     url: "/",
     images: [
@@ -39,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} | Louisville, KY NEMT`,
+    title: SEO_HOME_TITLE,
     description: HOME_DESCRIPTION,
     images: [{ url: DEFAULT_OG_IMAGE.url, alt: DEFAULT_OG_IMAGE.alt }],
   },
