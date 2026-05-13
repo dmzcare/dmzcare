@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Sansation } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
+import { AppGoogleAnalytics } from "@/components/analytics/AppGoogleAnalytics";
 import { SiteJsonLd } from "@/components/seo/SiteJsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -8,6 +10,7 @@ import { getSiteUrl, SEO_BASE_KEYWORDS, siteVerification } from "@/lib/seo";
 import { SITE, SITE_LOGO_ICON } from "@/lib/site";
 
 const siteUrl = getSiteUrl();
+const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 /** Google Fonts (Sansation): https://fonts.google.com/specimen/Sansation */
 const sansation = Sansation({
@@ -97,6 +100,11 @@ export default function RootLayout({
           {children}
         </div>
         <SiteFooter />
+        {gaMeasurementId ? (
+          <Suspense fallback={null}>
+            <AppGoogleAnalytics gaId={gaMeasurementId} />
+          </Suspense>
+        ) : null}
       </body>
     </html>
   );
